@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạp Hóa CodeGym</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+
+<body>
+    <div class="banner">
+        <img src="photos/bannerMall.png" alt="banner">
+    </div>
+    <div class="container">
+        <div class="products">
+
+        </div>
+        <div class="add-product">
+            <img onclick="showInputForm()" class="add-product-button" onmouseout="addProductButtonDefault()"
+                onmouseover="addProductButton()" src="photos/addNotYet.png" alt="addProduct">
+        </div>
+        <div class="input-table">
+            <div class="closeEdit">
+                <img onclick="closeEditTable()"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/OOjs_UI_icon_close-ltr-destructive.svg/768px-OOjs_UI_icon_close-ltr-destructive.svg.png"
+                    alt="">
+            </div>
+            <form>
+                <table>
+                    <caption>
+                        <h2><span style="color: red;">Input</span> Product Description</h2>
+                    </caption>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label for="inputting-product-name">Name</label>
+                            </td>
+                            <td colspan="3">
+                                <input id="inputting-product-name" type="text" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="inputting-product-photo">Photo</label>
+                            </td>
+                            <td colspan="3">
+                                <input id="inputting-product-photo" type="text" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="inputting-product-sold-count">Sold count</label>
+                            </td>
+                            <td>
+                                <input id="inputting-product-sold-count" type="number" required>
+                            </td>
+                            <td>
+                                <label for="inputting-product-left">Left</label>
+                            </td>
+                            <td>
+                                <input id="inputting-product-left" type="number" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="inputting-product-price">Price</label>
+                            </td>
+                            <td colspan="3">
+                                <input id="inputting-product-price" type="number" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button onclick="submitProduct()" id="input-submit-button" type="button">Add</button>
+                            </td>
+                            <td colspan="2">
+                                <button id="input-reset-button" type="reset">Clear</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div class="edit-table">
+            <div class="closeEdit">
+                <img onclick="closeEditTable()"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/OOjs_UI_icon_close-ltr-destructive.svg/768px-OOjs_UI_icon_close-ltr-destructive.svg.png"
+                    alt="">
+            </div>
+            <form>
+                <input type="hidden" id="idEdit">
+                <table>
+                    <caption>
+                        <h2><span style="color: red;">Edit</span> Product Description</h2>
+                    </caption>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label for="editting-product-name">Name</label>
+                            </td>
+                            <td colspan="3">
+                                <input id="editting-product-name" type="text" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="editting-product-photo">Photo</label>
+                            </td>
+                            <td colspan="3">
+                                <input id="editting-product-photo" type="text" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="editting-product-sold-count">Sold count</label>
+                            </td>
+                            <td>
+                                <input id="editting-product-sold-count" type="number" required>
+                            </td>
+                            <td>
+                                <label for="editting-product-left">Left</label>
+                            </td>
+                            <td>
+                                <input id="editting-product-left" type="number" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="editting-product-price">Price</label>
+                            </td>
+                            <td colspan="3">
+                                <input id="editting-product-price" type="number" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button onclick="submitEdittedProduct()" id="edit-submit-button"
+                                    type="button">Edit</button>
+                            </td>
+                            <td colspan="2">
+                                <button id="edit-reset-button" type="reset">Clear</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div class="shoppingCart" id="Shopping-Cart">
+            <div class="sticky-table">
+
+            </div>
+        </div>
+        <div class="backToCart">
+            <a href="#Shopping-Cart" title="Quay về giỏ hàng">
+                <img onclick="" src="photos/backtoShoppingCart.png">
+            </a>
+        </div>
+    </div>
+    <div id="checkoutMethods">
+        <div class="closeCheckingOut">
+            <img onclick="closeEditTable()"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/OOjs_UI_icon_close-ltr-destructive.svg/768px-OOjs_UI_icon_close-ltr-destructive.svg.png"
+                alt="">
+        </div>
+        <table id="checkoutTable" border="1">
+            <thead>
+                <th colspan="2">CHỌN PHƯƠNG THỨC THANH TOÁN</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="checkoutIcon">
+                        <img src="photos/creditCard.png" alt="">
+                    </td>
+                    <td class="checkoutOpt">
+                        <input id="creditCard" type="radio" name="checkoutMethod"> Quẹt thẻ bank H.A.N.G
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkoutIcon">
+                        <img src="photos/debt.png" alt="">
+                    </td>
+                    <td class="checkoutOpt">
+                        <input id="debt" type="radio" name="checkoutMethod" checked> Mua nợ
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkoutIcon">
+                        <img src="photos/cash.png" alt="">
+                    </td>
+                    <td onmouseover="moveRandom()" id="cashMethod" class="checkoutOpt">
+                        <input id="cash" type="radio" name="checkoutMethod" > Tiền mặt
+                    </td>
+                </tr>
+                <tr id="handle-checkout">
+                    <td colspan="2">
+                        <button onclick="finalCheckout()">Thanh Toán</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="javascriptFront.js"></script>
+    <script src="javascriptProducts.js"></script>
+</body>
+
+</html>
