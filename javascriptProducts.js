@@ -1,3 +1,7 @@
+function formatCurrency(number) {
+    
+    return parseInt(number).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+}
 class product {
     constructor(photo, name, soldCount, left, price) {
         this.photo = photo;
@@ -251,9 +255,7 @@ function submitEdittedProduct() {
     showProducts();
     document.querySelector(".edit-table").style.display = "none";
 }
-function formatCurrency(number) {
-    return number.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-}
+
 function finalCheckout() {
     if (document.getElementById("debt").checked == true) {
         alert("Bữa ni ai mua nợ nữa cha!");
