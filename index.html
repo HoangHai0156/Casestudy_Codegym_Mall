@@ -11,28 +11,32 @@
 
   <body>
     <div class="banner">
-      <img src="photos/bannerMall.png" alt="banner" />
+      <!-- <img src="photos/bannerMall.png" alt="banner" /> -->
     </div>
-    <!-- <div id="searching" style="height: 70px">
+    <div id="searching" style="height: 70px">
       <table>
         <tr>
           <td>
             <img src="photos/webLogo.png" alt="webLogo" />
           </td>
           <td>
-            <select name="searching-category" id="searching-category">
-              <option value="snack">Snack</option>
-              <option value="drinks">Drinks</option>
-              <option value="cookies">Cookies</option>
+            <select name="searching-category" id="searching-category" onchange="showFilteredProducts()">
+              <option value="All" selected>Category</option>
+              <option value="Snacks">Snacks</option>
+              <option value="Drinks">Drinks</option>
+              <option value="Cookies">Cookies</option>
+              <option value="Meals">Meals</option>
             </select>
           </td>
           <td>
-            <input id="searching-input" type="text">
+            <input id="searching-input" type="text" placeholder="Searching Box" oninput="showSearchingProducts()">
+          </td>
+          <td>
             <img src="photos/serchIcon.png" alt="serchIcon">
           </td>
         </tr>
       </table>
-    </div> -->
+    </div>
     <div class="container">
       <div class="products"></div>
       <div class="add-product">
@@ -97,8 +101,14 @@
                 <td>
                   <label for="inputting-product-price">Price</label>
                 </td>
-                <td colspan="3">
+                <td>
                   <input id="inputting-product-price" type="number" required />
+                </td>
+                <td>
+                  <label for="inputting-product-category">Category</label>
+                </td>
+                <td>
+                  <input id="inputting-product-category" type="text" required />
                 </td>
               </tr>
               <tr>
@@ -172,8 +182,14 @@
                 <td>
                   <label for="editting-product-price">Price</label>
                 </td>
-                <td colspan="3">
+                <td>
                   <input id="editting-product-price" type="number" required />
+                </td>
+                <td>
+                  <label for="editting-product-category">Category</label>
+                </td>
+                <td>
+                  <input id="editting-product-category" type="text" required />
                 </td>
               </tr>
               <tr>
