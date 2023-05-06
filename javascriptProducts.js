@@ -5,8 +5,15 @@ function formatCurrency(number) {
   });
 }
 class product {
+  id = 0;
+  photo = "";
   name = "";
-  constructor(photo, name, soldCount, left, price, category) {
+  soldCount = 0;
+  left = 0;
+  price = 0;
+  category = "";
+  constructor(id, photo, name, soldCount, left, price, category) {
+    this.id = id;
     this.photo = photo;
     this.name = name;
     this.soldCount = soldCount;
@@ -16,23 +23,44 @@ class product {
   }
 }
 let product_key = "Product-Key";
-let products = [new product(
-  "photos/donito.png",
-  "Doritos Nacho Cheese Flavored Tortilla Chips - 14.5oz",
-  10,
-  450,
-  80000,
-  "Snacks"
-),
-new product(
-  "photos/orange.png",
-  "Simply Orange Pulp Free Juice - 52 fl oz",
-  80,
-  120,
-  50000,
-  "Drinks"
-)];
-let filteredProducts = [];
+let products = [
+  new product(
+    "photos/donito.png",
+    "Doritos Nacho Cheese Flavored Tortilla Chips - 14.5oz",
+    10,
+    450,
+    80000,
+    "Snacks"
+  ),
+  new product(
+    "photos/orange.png",
+    "Simply Orange Pulp Free Juice - 52 fl oz",
+    80,
+    120,
+    50000,
+    "Drinks"
+  ),
+];
+let filteredProducts = [
+  new product(
+    1,
+    "photos/donito.png",
+    "Doritos Nacho Cheese Flavored Tortilla Chips - 14.5oz",
+    10,
+    450,
+    80000,
+    "Snacks"
+  ),
+  new product(
+    2,
+    "photos/orange.png",
+    "Simply Orange Pulp Free Juice - 52 fl oz",
+    80,
+    120,
+    50000,
+    "Drinks"
+  ),
+];
 init();
 function init() {
   if (localStorage.getItem(product_key) != null) {
@@ -40,6 +68,7 @@ function init() {
   } else {
     products = [
       new product(
+        1,
         "photos/donito.png",
         "Doritos Nacho Cheese Flavored Tortilla Chips - 14.5oz",
         10,
@@ -48,6 +77,7 @@ function init() {
         "Snacks"
       ),
       new product(
+        2,
         "photos/orange.png",
         "Simply Orange Pulp Free Juice - 52 fl oz",
         80,
@@ -56,6 +86,7 @@ function init() {
         "Drinks"
       ),
       new product(
+        3,
         "photos/bertolli.png",
         "Bertolli Frozen Chicken Florentine & Farfalle - 22oz",
         92,
@@ -64,6 +95,7 @@ function init() {
         "Meals"
       ),
       new product(
+        4,
         "photos/ree.png",
         "Reese's Easter Peanut Butter Eggs - 7.2oz/6ct",
         89,
@@ -72,6 +104,7 @@ function init() {
         "Cookies"
       ),
       new product(
+        5,
         "photos/WhiteChocolateBar.png",
         "Lindt Classic Recipe White Chocolate Bar 4.4oz",
         15,
@@ -80,6 +113,7 @@ function init() {
         "Cookies"
       ),
       new product(
+        6,
         "photos/dunkin.png",
         "Dunkin' Original Blend, Medium Roast Coffee",
         71,
@@ -88,6 +122,7 @@ function init() {
         "Drinks"
       ),
       new product(
+        7,
         "photos/honmet.png",
         "Rainbow Vanilla Cake Mix - 18.15oz - Favorite Day™",
         41,
@@ -96,6 +131,7 @@ function init() {
         "Meals"
       ),
       new product(
+        8,
         "photos/vanilla.png",
         "Hormel Gatherings Honey Ham, Turkey, Cheese & Crackers Party Tray - 28oz",
         19,
@@ -104,6 +140,7 @@ function init() {
         "Meals"
       ),
       new product(
+        9,
         "photos/strawBerryEnergy.png",
         "V8 Sparkling +Energy Strawberry Kiwi Juice Drink - 4pk/11.5 fl oz Cans",
         21,
@@ -112,6 +149,7 @@ function init() {
         "Drinks"
       ),
       new product(
+        10,
         "photos/springMix.png",
         "Spring Mix Edible Confetti Sprinkles - 2.6oz - Favorite Day™",
         8,
@@ -120,6 +158,7 @@ function init() {
         "Snacks"
       ),
       new product(
+        11,
         "photos/funFetti.png",
         "Pillsbury Funfetti Spring Vanilla Flavored Frosting - 15.6oz",
         4,
@@ -128,6 +167,7 @@ function init() {
         "Snacks"
       ),
       new product(
+        12,
         "photos/energyOrange.png",
         "V8 V-Fusion +Energy Orange Pineapple Vegetable & Fruit Juice - 6pk/8 fl oz Cans",
         90,
@@ -136,6 +176,7 @@ function init() {
         "Drinks"
       ),
     ];
+    filteredProducts = products;
     localStorage.setItem(product_key, JSON.stringify(products));
   }
 }
@@ -178,7 +219,7 @@ function showProducts(products) {
   let productsDiv = document.querySelector(".products");
   productsDiv.innerHTML = "";
   for (let product of products) {
-    var index = products.indexOf(product);
+    var id = product.id;
     productsDiv.innerHTML += `
         <div class="specific-product">
                 <div class="product-photo">
@@ -191,17 +232,26 @@ function showProducts(products) {
     }</p>
                 <p class="product-price">${formatCurrency(product.price)}</p>
                 <div class="add-button">
-                    <button class="add-to-cart" onclick="addToCart('${index}')">Add to cart</button>
+                    <button class="add-to-cart" onclick="addToCart(${id})">Add to cart</button>
                 </div>
                 <div class="edit-button">
-                    <button class="edit-product" onclick="editProduct('${index}')">Edit</button>
+                    <button class="edit-product" onclick="editProduct(${id})">Edit</button>
                 </div>
                 <div class="delete-button">
-                    <button class="delete-product" onclick="deleteProduct('${index}')">Delete</button>
+                    <button class="delete-product" onclick="deleteProduct(${id})">Delete</button>
                 </div>
         </div>        
         `;
   }
+}
+function findMaxId(products) {
+  var max = products[0].id;
+  products.forEach((product) => {
+    if (max < product.id) {
+      max = product.id;
+    }
+  });
+  return max;
 }
 function submitProduct() {
   inpPhoto = document.querySelector("#inputting-product-photo").value;
@@ -225,6 +275,7 @@ function submitProduct() {
   } else {
     products.push(
       new product(
+        findMaxId(products) + 1,
         inpPhoto,
         inpName,
         inpSoldCount,
@@ -239,15 +290,17 @@ function submitProduct() {
   }
 }
 let cart = new Cart();
-function addToCart(index) {
-  let p = products[index];
+function addToCart(id) {
+  let p = products.find(function (value) {
+    return value.id == id;
+  });
   if (p.left > 0) {
-    if (cart.findDup(index)) {
+    if (cart.findDup(id)) {
       for (let cartItem of cart.cartItems) {
-        if (cartItem.idProduct == index) {
+        if (cartItem.idProduct == id) {
           p.soldCount++;
           p.left--;
-          showProducts(products);
+          showProducts(filteredProducts);
           cartItem.quantity++;
           cartItem.total = cartItem.price * cartItem.quantity;
         }
@@ -255,8 +308,8 @@ function addToCart(index) {
     } else {
       p.soldCount++;
       p.left--;
-      showProducts(products);
-      cart.cartItems.push(new CartItem(index, p.photo, p.name, p.price));
+      showProducts(filteredProducts);
+      cart.cartItems.push(new CartItem(id, p.photo, p.name, p.price));
     }
 
     showCart();
@@ -311,17 +364,22 @@ function showCart() {
     </tr>
     `;
 }
-function deleteProduct(index) {
+function deleteProduct(id) {
+  var p = products.find(function (value) {
+    return value.id == id;
+  });
+  var index = products.indexOf(p);
   let Confirm = confirm("Bạn chắc chưa?");
   if (Confirm) {
     products.splice(index, 1);
     localStorage.setItem(product_key, JSON.stringify(products));
-    document.querySelector(".products").innerHTML = "";
     showProducts(products);
   }
 }
-function editProduct(INDEX) {
-  let editP = products[INDEX];
+function editProduct(id) {
+  let editP = products.find(function (value) {
+    return value.id == id;
+  });
   document.querySelector(".edit-table").style.display = "block";
   document.querySelector(".input-table").style.display = "none";
   document.getElementById("editting-product-name").value = editP.name;
@@ -331,13 +389,15 @@ function editProduct(INDEX) {
   document.getElementById("editting-product-left").value = editP.left;
   document.getElementById("editting-product-price").value = editP.price;
   document.getElementById("editting-product-category").value = editP.category;
-  document.getElementById("idEdit").value = INDEX;
+  document.getElementById("idEdit").value = id;
 }
-function deleteProductInCart(index) {
-  let profuctFromCart = products[index];
+function deleteProductInCart(id) {
+  let profuctFromCart = products.find(function (value) {
+    return value.id == id;
+  });
   let pCart = [];
   for (let value of cart.cartItems) {
-    if (value.idProduct == index) {
+    if (value.idProduct == id) {
       pCart = value;
       break;
     }
@@ -349,18 +409,21 @@ function deleteProductInCart(index) {
     showCart();
     profuctFromCart.soldCount--;
     profuctFromCart.left++;
-    showProducts(products);
+    showProducts(filteredProducts);
   } else {
     let index2 = cart.cartItems.indexOf(pCart);
     cart.cartItems.splice(index2, 1);
     showCart();
     profuctFromCart.soldCount--;
     profuctFromCart.left++;
-    showProducts(products);
+    showProducts(filteredProducts);
   }
 }
 function submitEdittedProduct() {
-  let edittingIndex = +document.getElementById("idEdit").value;
+  let id = document.getElementById("idEdit").value;
+  var edittedProduct = products.find(function (value) {
+    return value.id == id;
+  });
   let edittedName = document.getElementById("editting-product-name").value;
   let edittedPhoto = document.getElementById("editting-product-photo").value;
   let edittedSold = document.getElementById(
@@ -371,13 +434,13 @@ function submitEdittedProduct() {
   let edittedCategory = document.getElementById(
     "editting-product-category"
   ).value;
-  products[edittingIndex].name = edittedName;
-  products[edittingIndex].photo = edittedPhoto;
-  products[edittingIndex].soldCount = edittedSold;
-  products[edittingIndex].left = edittedLeft;
-  products[edittingIndex].price = edittedPrice;
-  products[edittingIndex].category = edittedCategory;
-  showProducts(products);
+  edittedProduct.name = edittedName;
+  edittedProduct.photo = edittedPhoto;
+  edittedProduct.soldCount = edittedSold;
+  edittedProduct.left = edittedLeft;
+  edittedProduct.price = edittedPrice;
+  edittedProduct.category = edittedCategory;
+  showProducts(filteredProducts);
   document.querySelector(".edit-table").style.display = "none";
 }
 
@@ -473,11 +536,10 @@ function showFilteredProducts() {
 function showSearchingProducts() {
   var searchingProduct = "";
   var searchingProduct = document.querySelector("#searching-input").value;
-  if (searchingProduct != ""){
-    var searchedProducts = filteredProducts.filter(function (product) {
+  if (searchingProduct != "") {
+    filteredProducts = filteredProducts.filter(function (product) {
       return product.name.includes(searchingProduct);
     });
-    showProducts(searchedProducts);
-  }else 
-  showFilteredProducts();
+    showProducts(filteredProducts);
+  } else showFilteredProducts();
 }
